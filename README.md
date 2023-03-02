@@ -52,3 +52,9 @@ python app.py
 open the link in the browser http://127.0.0.0:5000/
 
 
+## screenshots
+
+![Landing Page](screenshots/intro.jpeg)
+![Login Page](screenshots/login.jpeg)
+![Register Page](screenshots/register.jpeg)
+
