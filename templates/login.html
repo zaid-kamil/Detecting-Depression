@@ -1,0 +1,57 @@
+{% extends 'layout/base.html' %}
+
+{% block body %}
+<!-- shortcut to generate a vaible location => .container>.row>.col-md-4 -->
+<div class="container">
+    <div class="row form-row">
+        <div class="col-lg-4 bg-light rounded-5 p-5 shadow-lg ">
+            <h1 class="my-4 display-4 text-center">Sign In</h1>
+            <form class="" method="post">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="ex: Ravi@gmail.com" aria-describedby="emailHelp">
+                    {% if 'email' in errors %}
+                    <div id="emailHelp" class="form-text text-danger">{{errors['email']}}</div>
+                    {% endif %}
+
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password"
+                        placeholder="Your Password" aria-describedby="pwdHelp">
+                    {% if 'password' in errors %}
+                    <div id="pwdHelp" class="form-text text-danger">{{errors['password']}}</div>
+                    {% endif %}
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block css %}
+<style>
+    .form-row {
+        display: flex;
+        height: 90vh;
+        justify-content: center;
+        align-items: center;
+        font-family: "Roboto", sans-serif;
+    }
+
+    h1 {
+        color: rgb(28, 21, 252);
+    }
+
+    body {
+        background-color: #efefef;
+        background-blend-mode: overlay;
+        background-image: url("/static/images/bg2.jpeg");
+        background-size: cover;
+        background-repeat: no-repeat;
+
+    }
+</style>
+{% endblock %}

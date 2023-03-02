@@ -1,0 +1,84 @@
+{% extends 'layout/base.html' %}
+
+{% block body %}
+
+    <div class="container">
+        {#       an article about depression with cards in html #}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Suggested Doctors</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block css %}
+    <link href="https://cdn.datatables.net/v/dt/dt-1.13.3/datatables.min.css"/>
+    <style>
+
+        body {
+            background-color: #012869;
+            background-image: url('/static/images/bg1.jpg');
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: top;
+
+        }
+
+        main {
+            display: flex;
+            width: 100%;
+            height: 95vh;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            color: rgb(25, 26, 24);
+        }
+
+        .card {
+            background-color: transparent;
+            border: none;
+        }
+
+        .card-text {
+            font-size: 1.2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.87);
+            font-weight: 400;
+            line-height: 1.5;
+            color: rgb(25, 26, 24);
+            border-radius: .5rem;
+            transition: all .3s ease-in-out;
+        }
+
+        .card-text:hover {
+            background: rgba(248, 248, 244, 0.86);
+            transform: scale(1.01) translateY(-3px);
+        }
+
+        .card h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 1rem;
+            background: aliceblue;
+            border-radius: .5rem;
+        }
+    </style>
+{% endblock %}
+{% block js %}
+    <script src="https://cdn.datatables.net/v/dt/dt-1.13.3/datatables.min.js"></script>
+    <script>
+        // make image move 15px according to mouse movement
+        document.addEventListener('mousemove', (e) => {
+            document.querySelector('body').style.backgroundPositionX = -e.pageX / 90 + 'px';
+            document.querySelector('body').style.backgroundPositionY = -e.pageY / 90 + 'px';
+        });
+
+    </script>
+{% endblock %}

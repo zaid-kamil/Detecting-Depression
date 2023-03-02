@@ -1,0 +1,10 @@
+pandas
+flask
+flask_sqlalchemy
+nltk
+textblob
+scikit-learn
+plotly
+seaborn
+matplotlib
+numpy

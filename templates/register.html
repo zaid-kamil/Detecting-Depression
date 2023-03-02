@@ -1,0 +1,78 @@
+{% extends 'layout/base.html' %}
+
+{% block body %}
+<!-- shortcut to generate a vaible location => .container>.row>.col-md-4 -->
+<div class="container">
+    <div class="row form-row">
+        <div class="col-lg-5 bg-light rounded-5 p-5 shadow-lg ">
+            <h1 class="my-4 text-primary">Register free account</h1>
+            {% if error_list %}
+            {% for msg in error_list %}
+            <p class="text-danger text-small">
+                {{ msg|e }}
+            </p>
+            {% endfor %}
+            {% endif %}
+
+            <form class="" method="POST">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                </div>
+
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username">
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password"
+                        aria-describedby="passHelp">
+                    <div class="form-text" id="passHelp">Password should be min 6 chars</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="confirmpass" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmpass" name="confirmpass">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block css %}
+<style>
+    .form-row {
+        display: flex;
+        height: 90vh;
+        justify-content: center;
+        align-items: center;
+    }
+
+     h1 {
+        color: rgb(28, 21, 252);
+    }
+
+    body {
+        background-color: #e8e2e4;
+        background-image: url("/static/images/bg3.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+
+    }
+</style>
+{% endblock %}
+{% block js %}
+    <script>
+        // make image move 15px according to mouse movement
+       document.addEventListener('mousemove', (e) => {
+            document.querySelector('body').style.backgroundPositionX = -e.pageX / 90 + 'px';
+            document.querySelector('body').style.backgroundPositionY = -e.pageY / 90 + 'px';
+        });
+
+    </script>
+{% endblock %}

@@ -1,0 +1,140 @@
+{% extends 'layout/base.html' %}
+
+{% block body %}
+
+    <div class="container">
+        {#       an article about depression with cards in html #}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Depression</h2>
+                        <p class="card-text">Depression is a common mental health disorder that causes people to
+                            experience
+                            depressed mood, loss of interest or pleasure, feelings of guilt or low self-worth, disturbed
+                            sleep
+                            or appetite, low energy, and poor concentration. It affects how you feel, think and behave
+                            and
+                            can
+                            lead to a variety of emotional and physical problems. You may have trouble doing normal
+                            day-to-day
+                            activities, and sometimes you may feel as if life isn't worth living. Depression is a
+                            serious
+                            medical illness and not a sign of personal weakness or a condition that can be willed or
+                            wished
+                            away.
+                        </p>
+                        <p class="card-text">
+                            Depression is a mood disorder that causes a persistent feeling of sadness and loss of
+                            interest. Also called major depressive disorder or clinical depression, it affects how you
+                            feel,
+                            think and behave and can lead to a variety of emotional and physical problems. You may have
+                            trouble
+                            doing normal day-to-day activities, and sometimes you may feel as if life isn't worth
+                            living.
+                            Depression is a serious medical illness and not a sign of personal weakness or a condition
+                            that
+                            can
+                            be willed or wished away. Depression is a mood disorder that causes a persistent feeling of
+                            sadness
+                            and loss of interest. Also called major depressive disorder or clinical depression, it
+                            affects
+                            how
+                            you feel, think and behave and can lead to a variety of emotional and physical problems. You
+                            may
+                            have trouble doing normal day-to-day activities, and sometimes you may feel as if life isn't
+                            worth
+                            living.
+                        </p>
+
+                        <p class="card-text">
+                            Depression is a serious medical illness and not a sign of personal weakness or a
+                            condition
+                            that can be willed or wished away. Depression is a mood disorder that causes a persistent
+                            feeling of
+                            sadness and loss of interest. Also called major depressive disorder or clinical depression,
+                            it
+                            affects how you feel, think and behave and can lead to a variety of emotional and physical
+                            problems.
+                            You may have trouble doing normal day-to-day activities, and sometimes you may feel as if
+                            life
+                            isn't
+                            worth living. Depression is a serious medical illness and not a sign of personal weakness or
+                            a
+                            condition that can be willed or wished away.
+                        </p>
+                        <div class="card-text text-center">
+                            Use this project to predict prediction <a class="btn btn-primary " href="/form">Click
+                            here</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block css %}
+    <style>
+
+        body {
+            background-color: #012869;
+            background-image: url('/static/images/bg1.jpg');
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: top;
+
+        }
+
+        main {
+            display: flex;
+            width: 100%;
+            height: 95vh;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            color: rgb(25, 26, 24);
+        }
+
+        .card {
+            background-color: transparent;
+            border: none;
+        }
+
+        .card-text {
+            font-size: 1.2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.87);
+            font-weight: 400;
+            line-height: 1.5;
+            color: rgb(25, 26, 24);
+            border-radius: .5rem;
+            transition: all .3s ease-in-out;
+        }
+
+        .card-text:hover {
+            background: rgba(248, 248, 244, 0.86);
+            transform: scale(1.01) translateY(-3px);
+        }
+
+        .card h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 1rem;
+            background: aliceblue;
+            border-radius: .5rem;
+        }
+    </style>
+{% endblock %}
+{% block js %}
+    <script>
+        // make image move 15px according to mouse movement
+        document.addEventListener('mousemove', (e) => {
+            document.querySelector('body').style.backgroundPositionX = -e.pageX / 90 + 'px';
+            document.querySelector('body').style.backgroundPositionY = -e.pageY / 90 + 'px';
+        });
+
+    </script>
+{% endblock %}
