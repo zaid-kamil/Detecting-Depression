@@ -2,6 +2,7 @@ from datetime import datetime
 
 from flask import Flask, render_template, request, redirect, flash, session
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import func
 
 db = SQLAlchemy()
 from nlp_utils import preprocess
@@ -165,7 +166,7 @@ def predict_depression(message):
     cleaned_message = preprocess(message)
     model = load('models/svc_cv_model.joblib')
     prediction = model.predict([cleaned_message])
-    return prediction[0]
+    return int(prediction[0])
 
 
 @app.route('/form', methods=['GET', 'POST'])
@@ -197,8 +198,9 @@ def prediction():
     if 'is_logged_in' not in session:
         return redirect('/login')
     predictions = Prediction.query.filter_by(user_id=session['id']).all()
-    return render_template('prediction.html', predictions=predictions)
-
+    # get 10 random doctors
+    doctors = Doctor.query.order_by(func.random()).limit(10).all()
+    return render_template('prediction.html', results=predictions, doctors=doctors)
 
 @app.route('/doctors')
 def doctors():

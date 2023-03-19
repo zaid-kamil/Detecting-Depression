@@ -1,25 +1,86 @@
 {% extends 'layout/base.html' %}
 
 {% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">AI Predicted results</h2>
+                    <div class="card-text">
+                        <table id="prediction" class="table table-responsive ">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Diagnosis</th>
+                                    <th>Your Comment</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if results %}
+                                {% for result in results %}
+                                <tr>
+                                    <td>{{ result.id }}</td>
+                                    <td>{{ result.prediction }}</td>
+                                    <td>{{ result.message }}</td>
+                                    <td>{{ result.created_on.date() }}</td>
+                                </tr>
+                                {% endfor %}
 
-    <div class="container">
-        {#       an article about depression with cards in html #}
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title">Suggested Doctors</h2>
+                                {% else %}
+                                <tr>
+                                    <td colspan="4" class="text-center display-4">No results found</td>
+                                    <td colspan="4" class="text-center display-4">
+                                        <a href="/form" class="btn btn-primary">Add new entry</a>
+                                    </td>
+                                </tr>
+
+                                {% endif %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Suggested Doctors</h2>
+                    <div class="card-text">
+                        <table id="doctors" class="table table-responsive ">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Doctor Name</th>
+                                    <th>Location</th>
+                                    <th>Contact</th>
+                                    <th>Speciality</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for doctor in doctors %}
+                                <tr>
+                                    <td>{{ doctor.id }}</td>
+                                    <td>{{ doctor.name }}</td>
+                                    <td>{{ doctor.address }}</td>
+                                    <td>{{ doctor.contact }}</td>
+                                    <td>{{ doctor.specialization }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-{% endblock %}
+    {% endblock %}
 
-{% block css %}
-    <link href="https://cdn.datatables.net/v/dt/dt-1.13.3/datatables.min.css"/>
+    {% block css %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/v/dt/dt-1.13.3/datatables.min.css">
     <style>
-
         body {
             background-color: #012869;
             background-image: url('/static/images/bg1.jpg');
@@ -32,7 +93,7 @@
         main {
             display: flex;
             width: 100%;
-            height: 95vh;
+            min-height: 95vh;
             flex-flow: column;
             justify-content: center;
             align-items: center;
@@ -56,10 +117,7 @@
             transition: all .3s ease-in-out;
         }
 
-        .card-text:hover {
-            background: rgba(248, 248, 244, 0.86);
-            transform: scale(1.01) translateY(-3px);
-        }
+      
 
         .card h2 {
             font-size: 2rem;
@@ -70,8 +128,10 @@
             border-radius: .5rem;
         }
     </style>
-{% endblock %}
-{% block js %}
+    {% endblock %}
+    {% block js %}
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/v/dt/dt-1.13.3/datatables.min.js"></script>
     <script>
         // make image move 15px according to mouse movement
@@ -80,5 +140,37 @@
             document.querySelector('body').style.backgroundPositionY = -e.pageY / 90 + 'px';
         });
 
+        $(function () {
+            let table = new DataTable('#doctors', {
+                pageLength: 5,
+                // handle phone number as contact
+                columnDefs: [
+                    {
+                        targets: 3,
+                        render: function (data, type, row) {
+                            return '<a href="tel:' + data + '">' + data + '</a>';
+                        }
+                    }
+                ],
+
+            });
+            let table2 = new DataTable('#prediction', {
+                pageLength: 5,
+                // make column to be converted to text based on 0 and 1 and change color
+                columnDefs: [
+                    {
+                        targets: 1,
+                        render: function (data, type, row) {
+                            if (data == 0) {
+                                return '<span class="text-success">No Depression 🙂 </span>';
+                            } else {
+                                return '<span class="text-danger">Depression Detected 😰 </span>';
+                            }
+                        }
+                    }
+                ]
+            });
+        });
+
     </script>
-{% endblock %}
+    {% endblock %}
